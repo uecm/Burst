@@ -10,13 +10,12 @@
 #import <UIKit/UIKit.h>
 @import Photos;
 
-@class PHFetchResult;
-
 
 @interface ImageManager : NSObject
 
 
-+ (NSData *)webPDataWithImages:(NSArray *)images duration:(CGFloat)duration fileName:(NSString *)fileName;
++ (NSData *)webPDataWithImages:(NSArray *)images duration:(CGFloat)duration;
 + (void)imagesFromFetchResult:(PHFetchResult*)fetchResult completion:(void(^)(BOOL success, NSArray *imgs)) completion;
-
++(NSArray<UIImage *> *)decodedImageFromData:(NSData *)data;
++ (NSString *)pathForGIFDataWithImages:(NSArray *)images duration:(CGFloat)duration;
 @end

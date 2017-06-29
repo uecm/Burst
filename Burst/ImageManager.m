@@ -8,13 +8,15 @@
 
 #import "ImageManager.h"
 #import <YYImage.h>
+#import <MobileCoreServices/MobileCoreServices.h>
+
 @import PhotosUI;
 @import AssetsLibrary;
 
 @implementation ImageManager
 
 
-+ (NSData *)webPDataWithImages:(NSArray *)images duration:(CGFloat)duration fileName:(NSString *)fileName{
++ (NSData *)webPDataWithImages:(NSArray *)images duration:(CGFloat)duration {
     YYImageEncoder *webpEncoder = [[YYImageEncoder alloc] initWithType:YYImageTypeWebP];
     webpEncoder.loopCount = 1;
     
@@ -67,6 +69,47 @@
                                                     }
                                                 }];
     }
+}
+
++(NSArray<UIImage *> *)decodedImageFromData:(NSData *)data{
+
+    YYImageDecoder *imageDecoder = [YYImageDecoder decoderWithData:data scale:1.f];
+    
+    NSUInteger frameCount = imageDecoder.frameCount;
+    NSMutableArray *frames = [[NSMutableArray alloc] initWithCapacity:frameCount];
+    
+    for (int i = 0; i < frameCount; i++) {
+        YYImageFrame *imageFrame = [imageDecoder frameAtIndex:i decodeForDisplay:true];
+        [frames addObject:imageFrame];
+    }
+    return [frames copy];
+}
+
++(NSString *)pathForGIFDataWithImages:(NSArray *)images duration:(CGFloat)duration{
+    
+    CGFloat frameDuration = duration / images.count;
+    
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject] stringByAppendingPathComponent:@"animation.gif"];
+    
+    CGImageDestinationRef destination = CGImageDestinationCreateWithURL((CFURLRef)[NSURL fileURLWithPath:path],
+                                                                        kUTTypeGIF,
+                                                                        images.count - 1,
+                                                                        NULL);
+    
+    NSDictionary *frameProperties = [NSDictionary dictionaryWithObject:[NSDictionary dictionaryWithObject:@(frameDuration) forKey:(NSString *)kCGImagePropertyGIFDelayTime]
+                                                                forKey:(NSString *)kCGImagePropertyGIFDictionary];
+    NSDictionary *gifProperties = [NSDictionary dictionaryWithObject:[NSDictionary dictionaryWithObject:[NSNumber numberWithInt:0] forKey:(NSString *)kCGImagePropertyGIFLoopCount]
+                                                              forKey:(NSString *)kCGImagePropertyGIFDictionary];
+    
+    for (UIImage *image in images) {
+        CGImageDestinationAddImage(destination, image.CGImage, (CFDictionaryRef)frameProperties);
+    }
+    CGImageDestinationSetProperties(destination, (CFDictionaryRef)gifProperties);
+    CGImageDestinationFinalize(destination);
+    CFRelease(destination);
+    NSLog(@"animated GIF file created at %@", path);
+    
+    return path;
 }
 
 @end
