@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -32,15 +32,29 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="SLY-Qp-Y5S">
                                 <rect key="frame" x="94" y="40" width="187.5" height="333.5"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O1G-Kc-Rs6">
+                                <rect key="frame" x="151.5" y="519" width="71" height="30"/>
+                                <state key="normal" title="Make a gif"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JCZ-Qw-D0c">
+                                <rect key="frame" x="155.5" y="481" width="63" height="30"/>
+                                <state key="normal" title="Play a gif">
+                                    <color key="titleColor" red="0.0" green="0.80000000000000004" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="O1G-Kc-Rs6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5ri-1I-8m4"/>
                             <constraint firstItem="SLY-Qp-Y5S" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CKu-tB-F8L"/>
+                            <constraint firstItem="lmh-nF-jXD" firstAttribute="top" secondItem="O1G-Kc-Rs6" secondAttribute="bottom" constant="8" id="EzB-Mm-vd5"/>
                             <constraint firstItem="lmh-nF-jXD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="L3k-e3-k7Z"/>
+                            <constraint firstItem="JCZ-Qw-D0c" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="L7b-Jt-ZwI"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lmh-nF-jXD" secondAttribute="bottom" constant="80" id="Ty8-Ob-2T7"/>
                             <constraint firstItem="SLY-Qp-Y5S" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="ZKe-aX-fAG"/>
                             <constraint firstItem="SLY-Qp-Y5S" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.5" id="eEq-cZ-prK"/>
                             <constraint firstItem="SLY-Qp-Y5S" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="gdG-yz-irF"/>
+                            <constraint firstItem="O1G-Kc-Rs6" firstAttribute="top" secondItem="JCZ-Qw-D0c" secondAttribute="bottom" constant="8" id="l1Q-4n-0Er"/>
                         </constraints>
                     </view>
                     <connections>

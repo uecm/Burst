@@ -7,15 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0591C058712DB9058C1091B8 /* libPods-Burst.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF2755B23ACBDE637C917CBC /* libPods-Burst.a */; };
 		745C6F511F041ADB00311C09 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 745C6F501F041ADB00311C09 /* main.m */; };
 		745C6F541F041ADB00311C09 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 745C6F531F041ADB00311C09 /* AppDelegate.m */; };
 		745C6F571F041ADB00311C09 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 745C6F561F041ADB00311C09 /* ViewController.m */; };
 		745C6F5A1F041ADB00311C09 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 745C6F581F041ADB00311C09 /* Main.storyboard */; };
 		745C6F5C1F041ADB00311C09 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 745C6F5B1F041ADB00311C09 /* Assets.xcassets */; };
 		745C6F5F1F041ADB00311C09 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 745C6F5D1F041ADB00311C09 /* LaunchScreen.storyboard */; };
+		CEAED4401F05036100EBCCAD /* ImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = CEAED43F1F05036100EBCCAD /* ImageManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		35713024AD8DB6AA1231D316 /* Pods-Burst.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Burst.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Burst/Pods-Burst.debug.xcconfig"; sourceTree = "<group>"; };
 		745C6F4C1F041ADB00311C09 /* Burst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Burst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		745C6F501F041ADB00311C09 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		745C6F521F041ADB00311C09 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -26,6 +29,10 @@
 		745C6F5B1F041ADB00311C09 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		745C6F5E1F041ADB00311C09 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		745C6F601F041ADB00311C09 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE952626F008F37FBCEC7165 /* Pods-Burst.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Burst.release.xcconfig"; path = "Pods/Target Support Files/Pods-Burst/Pods-Burst.release.xcconfig"; sourceTree = "<group>"; };
+		BF2755B23ACBDE637C917CBC /* libPods-Burst.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Burst.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		CEAED43E1F05036100EBCCAD /* ImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageManager.h; sourceTree = "<group>"; };
+		CEAED43F1F05036100EBCCAD /* ImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +40,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0591C058712DB9058C1091B8 /* libPods-Burst.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6EE6AC42057C07475423A39B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				35713024AD8DB6AA1231D316 /* Pods-Burst.debug.xcconfig */,
+				BE952626F008F37FBCEC7165 /* Pods-Burst.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		745C6F431F041ADB00311C09 = {
 			isa = PBXGroup;
 			children = (
 				745C6F4E1F041ADB00311C09 /* Burst */,
 				745C6F4D1F041ADB00311C09 /* Products */,
+				6EE6AC42057C07475423A39B /* Pods */,
+				A947BB3B003256B08E499397 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +86,8 @@
 				745C6F5D1F041ADB00311C09 /* LaunchScreen.storyboard */,
 				745C6F601F041ADB00311C09 /* Info.plist */,
 				745C6F4F1F041ADB00311C09 /* Supporting Files */,
+				CEAED43E1F05036100EBCCAD /* ImageManager.h */,
+				CEAED43F1F05036100EBCCAD /* ImageManager.m */,
 			);
 			path = Burst;
 			sourceTree = "<group>";
@@ -79,6 +100,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		A947BB3B003256B08E499397 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF2755B23ACBDE637C917CBC /* libPods-Burst.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -86,9 +115,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 745C6F631F041ADB00311C09 /* Build configuration list for PBXNativeTarget "Burst" */;
 			buildPhases = (
+				E1BCB303C0F9141A6A1FA097 /* [CP] Check Pods Manifest.lock */,
 				745C6F481F041ADB00311C09 /* Sources */,
 				745C6F491F041ADB00311C09 /* Frameworks */,
 				745C6F4A1F041ADB00311C09 /* Resources */,
+				0210D2BFD647D9CB758EAC16 /* [CP] Embed Pods Frameworks */,
+				1A06D8BAE5C4D786BF7EFDFC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -146,6 +178,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0210D2BFD647D9CB758EAC16 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Burst/Pods-Burst-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1A06D8BAE5C4D786BF7EFDFC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Burst/Pods-Burst-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E1BCB303C0F9141A6A1FA097 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		745C6F481F041ADB00311C09 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -154,6 +234,7 @@
 				745C6F571F041ADB00311C09 /* ViewController.m in Sources */,
 				745C6F541F041ADB00311C09 /* AppDelegate.m in Sources */,
 				745C6F511F041ADB00311C09 /* main.m in Sources */,
+				CEAED4401F05036100EBCCAD /* ImageManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +352,7 @@
 		};
 		745C6F641F041ADB00311C09 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 35713024AD8DB6AA1231D316 /* Pods-Burst.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = DD484H6UF4;
@@ -283,6 +365,7 @@
 		};
 		745C6F651F041ADB00311C09 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BE952626F008F37FBCEC7165 /* Pods-Burst.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = DD484H6UF4;
@@ -312,6 +395,7 @@
 				745C6F651F041ADB00311C09 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -7,9 +7,9 @@
 //
 
 #import "ViewController.h"
-@import Photos;
-@import PhotosUI;
-@import AssetsLibrary;
+#import <MobileCoreServices/MobileCoreServices.h>
+#import "ImageManager.h"
+
 
 @interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -68,43 +68,26 @@
     PHAsset *asset = [fetchResult firstObject];
     
     if (!asset.representsBurst) {
-        NSLog(@"What a shame! Selected photo is not a burst.");
+        NSLog(@"Selected photo is not a burst.");
         return;
     }
     PHFetchResult *burstPhotos = [PHAsset fetchAssetsWithBurstIdentifier:asset.burstIdentifier options:options];
-    NSLog(@"Burst has %d photos in it!", (int)burstPhotos.count);
+    NSLog(@"Burst has %d photos in it.", (int)burstPhotos.count);
     
     [picker dismissViewControllerAnimated:true completion:nil];
-    self.images = [self imagesFromFetchResult:burstPhotos];
-    [self updateImageView];
-}
-
--(NSArray *) imagesFromFetchResult:(PHFetchResult*)fetchResult{
-    
-    NSMutableArray *imagesMutableArray = [NSMutableArray arrayWithCapacity:fetchResult.count];
-    
-    PHAsset *asset = fetchResult.firstObject;
-    CGSize imageSize = {asset.pixelWidth/2, asset.pixelHeight/2};
-    
-    for (PHAsset *asset in fetchResult) {
-        [[PHImageManager defaultManager] requestImageForAsset:asset
-                                                   targetSize:imageSize
-                                                  contentMode:PHImageContentModeDefault
-                                                      options:NULL
-                                                resultHandler:^(UIImage * _Nullable result,
-                                                                NSDictionary * _Nullable info) {
-            if (result) {
-                [imagesMutableArray addObject:result];
-            }
-        }];
-    }
-    NSLog(@"Finally, we got %d images in our array.", (int)imagesMutableArray.count);
-    return [imagesMutableArray copy];
+    [ImageManager imagesFromFetchResult:burstPhotos completion:^(BOOL success, NSArray *imgs) {
+        if (success) {
+            self.images = imgs;
+            NSLog(@"Fetched photos array has %d photos in it.",(int)imgs.count);
+            
+            [self updateImageView];
+        }
+    }];
 }
 
 -(void) updateImageView{
     
-    UIImage *image = self.images[arc4random_uniform((int)self.images.count)];
+    UIImage *image = self.images.firstObject;
     CGSize size = image.size;
     
     float ratio = size.width > size.height ? (size.height / size.width) : (size.width / size.height);
