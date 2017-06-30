@@ -13,6 +13,7 @@
 
 #import <HTPressableButton.h>
 #import <UIColor+HTColor.h>
+#import <MRProgress.h>
 
 @interface ViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
@@ -30,6 +31,7 @@
 @property (strong, nonatomic) NSArray<UIImage *> *images;
 @property (strong, nonatomic) YYImage *animationImage;
 
+@property (strong, nonatomic) MRProgressOverlayView *progressView;
 
 @end
 
@@ -53,15 +55,23 @@
     
     self.imageView.autoPlayAnimatedImage = false;
     
-    // Setup    Open Gallery Button
+    // Setup buttons
+    [self setupButton:self.openGalleryButton withColor:[UIColor ht_aquaColor] shadowColor:[UIColor ht_aquaDarkColor]];
+    [self setupButton:self.makeGifButton withColor:[UIColor ht_aquaColor] shadowColor:[UIColor ht_aquaDarkColor]];
+    [self setupButton:self.playGifButton withColor:[UIColor ht_mintColor] shadowColor:[UIColor ht_mintDarkColor]];
     
-    CGRect frame = {self.openGalleryButton.frame.origin, {130, 40}};
-    self.openGalleryButton.frame = frame;
-    self.openGalleryButton.style = HTPressableButtonStyleRounded;
-    self.openGalleryButton.buttonColor = [UIColor ht_aquaColor];
-    self.openGalleryButton.shadowHeight = (int)(40 * 0.17);
-    self.openGalleryButton.shadowColor = [UIColor ht_aquaDarkColor];
-    [self.openGalleryButton createButton];
+    // Setup progress view
+}
+
+-(MRProgressOverlayView *)progressView{
+    if (_progressView) {
+        return _progressView;
+    }
+    
+    MRProgressOverlayView *view = [MRProgressOverlayView showOverlayAddedTo:self.view title:@"" mode:MRProgressOverlayViewModeDeterminateCircular animated:true];
+    view.tintColor = [UIColor ht_aquaColor];
+    
+    return _progressView = view;
 }
 
 
@@ -69,6 +79,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 
 - (IBAction)openGalleryPressed:(id)sender {
     
@@ -85,12 +96,25 @@
 }
 
 
+
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     [picker dismissViewControllerAnimated:true completion:nil];
 }
 
 
 -(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    
+    [picker dismissViewControllerAnimated:true completion:^{
+        self.progressView.progress = 0;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            [self handleImageMediaInfo:info];
+        });
+    }];
+}
+
+
+
+-(void) handleImageMediaInfo:(NSDictionary<NSString *,id> *)info {
     NSURL *imageURL = info[UIImagePickerControllerReferenceURL];
     
     PHFetchOptions *options = [[PHFetchOptions alloc] init];
@@ -104,19 +128,34 @@
         NSLog(@"Selected photo is not a burst.");
         return;
     }
+    
     PHFetchResult *burstPhotos = [PHAsset fetchAssetsWithBurstIdentifier:asset.burstIdentifier options:options];
     NSLog(@"Burst has %d photos in it.", (int)burstPhotos.count);
     
-    [picker dismissViewControllerAnimated:true completion:nil];
-    [ImageManager imagesFromFetchResult:burstPhotos completion:^(BOOL success, NSArray *imgs) {
-        if (success) {
-            self.images = imgs;
-            NSLog(@"Fetched photos array has %d photos in it.",(int)imgs.count);
-            
-            [self updateImageView];
-        }
-    }];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [ImageManager imagesFromFetchResult:burstPhotos completion:^(BOOL success, NSArray *imgs) {
+            if (success) {
+                self.images = imgs;
+                NSLog(@"Fetched photos array has %d photos in it.",(int)imgs.count);
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self updateImageView];
+                    [self.progressView dismiss:true completion:^{
+                        self.progressView = nil;
+                    }];
+                    [self updateFpsLabel];
+                });
+            }
+        } progress:^(float progress, int counter) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                if (self.progressView) {
+                    self.progressView.progress = progress;
+                }
+            });
+        }];
+    });
 }
+
+
 
 -(void) updateImageView{
     
@@ -127,7 +166,7 @@
     float heigth = floorf(self.view.frame.size.height);
     float width = floorf(heigth * ratio);
     
-    CGRect frame = {{(int)(self.view.center.x - width/2), 20},{heigth,width}};
+    CGRect frame = {{(self.view.center.x - width/2), 20},{heigth,width}};
     self.imageView.frame = frame;
     self.imageView.image = image;
     
@@ -139,28 +178,49 @@
     }];
 }
 
+
+
 - (IBAction)makeGifPressed:(id)sender {
     if (!self.images) {
         return;
     }
     
-    NSData *webPData = [ImageManager webPDataWithImages:self.images duration:[self durationForAnimation]];
-    self.animationImage = [YYImage imageWithData:webPData];
-    [UIView animateWithDuration:0.2 animations:^{
-        self.playGifButton.alpha = 1;
-    }];
-
-    [self.playGifButton setTitle:@"Play a gif" forState:UIControlStateNormal];
-    [self.playGifButton setTitleColor:[UIColor colorWithRed:0 green:204./255. blue:51./255. alpha:1] forState:UIControlStateNormal];
-
-    self.imageView.image = self.animationImage;    
-    [self updateFpsLabel];
+    self.progressView.progress = 0;
+    self.progressView.mode = MRProgressOverlayViewModeIndeterminate;
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSData *webPData = [ImageManager webPDataWithImages:self.images duration:[self durationForAnimation]];
+        self.animationImage = [YYImage imageWithData:webPData];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [UIView animateWithDuration:0.2 animations:^{
+                self.playGifButton.alpha = 1;
+            }];
+            [self.playGifButton setTitle:@"Play a gif" forState:UIControlStateNormal];
+        
+            self.imageView.image = self.animationImage;
+            
+            [self.progressView dismiss:true completion:^{
+                self.progressView = nil;
+            }];
+        });
+    });
+    
 }
+
+
 
 - (IBAction)playGifPressed:(id)sender {
     
     BOOL isPlayState = [self.playGifButton.titleLabel.text isEqualToString:@"Play a gif"];
     
+    BOOL ended = self.imageView.currentAnimatedImageIndex == self.images.count-1;
+    
+    if (ended) {
+        self.imageView.currentAnimatedImageIndex = 0;
+        isPlayState = false;
+    }
     
     if (isPlayState) {
         
@@ -169,24 +229,26 @@
         }
         
         [self.playGifButton setTitle:@"Stop playing" forState:UIControlStateNormal];
-        [self.playGifButton setTitleColor:[UIColor colorWithRed:232./255. green:20./255. blue:122./255. alpha:1] forState:UIControlStateNormal];
+        [self setupButton:self.playGifButton withColor:[UIColor ht_alizarinColor] shadowColor:[UIColor ht_pomegranateColor]];
     }
     else {
         
         if (self.imageView.currentIsPlayingAnimation) {
             [self.imageView stopAnimating];
         }
-        
         [self.playGifButton setTitle:@"Play a gif" forState:UIControlStateNormal];
-        [self.playGifButton setTitleColor:[UIColor colorWithRed:0 green:204./255. blue:51./255. alpha:1] forState:UIControlStateNormal];
+        [self setupButton:self.playGifButton withColor:[UIColor ht_mintColor] shadowColor:[UIColor ht_mintDarkColor]];
     }
 }
+
+
 
 - (IBAction)sliderValueChanged:(id)sender {
     
     [self updateFpsLabel];
-    
 }
+
+
 
 -(float) durationForAnimation {
     
@@ -198,6 +260,8 @@
     }
     return currentDuration;
 }
+
+
 
 -(void) updateFpsLabel{
     
@@ -211,6 +275,8 @@
     self.secondsLabel.text = durationText;
 }
 
+
+
 - (IBAction)sharePressed:(id)sender {
     if(!self.animationImage) return;
     
@@ -219,6 +285,18 @@
     
     UIActivityViewController *shareVC = [[UIActivityViewController alloc] initWithActivityItems:@[imgData] applicationActivities:nil];
     [self presentViewController:shareVC animated:true completion:nil];
+}
+
+
+
+-(void) setupButton:(HTPressableButton*)button withColor:(UIColor*)color shadowColor:(UIColor*)shadowColor{
+    CGRect frame = {[button convertPoint:button.frame.origin toView:self.view], {130, 40}};
+    button.frame = frame;
+    button.style = HTPressableButtonStyleRounded;
+    button.buttonColor = color;
+    button.shadowHeight = (int)(40 * 0.17);
+    button.shadowColor = shadowColor;
+    //[button createButton];
 }
 
 

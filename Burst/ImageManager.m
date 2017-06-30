@@ -30,7 +30,7 @@
 }
 
 
-+ (void)imagesFromFetchResult:(PHFetchResult*)fetchResult completion:(void(^)(BOOL success, NSArray *imgs)) completion{
++ (void)imagesFromFetchResult:(PHFetchResult*)fetchResult completion:(void(^)(BOOL success, NSArray *imgs)) completion progress:(void (^ _Nullable)(float,int))progress{
     
     
     NSMutableArray *fetchResultArray = [[NSMutableArray alloc] init];
@@ -61,6 +61,11 @@
                                                     if (result) {
                                                         [imagesMutableArray addObject:result];
                                                         counter++;
+                                                        
+                                                        if (progress) {
+                                                            float progr = ((float)counter)/fetchResult.count;
+                                                            progress(progr,counter);
+                                                        }
                                     
                                                         if (counter == fetchResult.count) {
                                                             NSArray *images = [imagesMutableArray copy];

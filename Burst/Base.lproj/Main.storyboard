@@ -44,7 +44,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JCZ-Qw-D0c" customClass="HTPressableButton">
                                 <rect key="frame" x="150" y="469" width="74" height="34"/>
                                 <state key="normal" title="Play a gif">
-                                    <color key="titleColor" red="0.0" green="0.80000000000000004" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="playGifPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OvT-ni-3Wq"/>

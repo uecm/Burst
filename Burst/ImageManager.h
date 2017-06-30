@@ -15,7 +15,7 @@
 
 
 + (NSData *)webPDataWithImages:(NSArray *)images duration:(CGFloat)duration;
-+ (void)imagesFromFetchResult:(PHFetchResult*)fetchResult completion:(void(^)(BOOL success, NSArray *imgs)) completion;
++ (void)imagesFromFetchResult:(PHFetchResult*)fetchResult completion:(void(^)(BOOL success, NSArray *imgs)) completion progress:( void(^ _Nullable)(float progress, int counter))progress;
 +(NSArray<UIImage *> *)decodedImageFromData:(NSData *)data;
 + (NSString *)pathForGIFDataWithImages:(NSArray *)images duration:(CGFloat)duration;
 @end
