@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,7 +24,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lmh-nF-jXD" customClass="HTPressableButton">
-                                <rect key="frame" x="135.5" y="553" width="103" height="34"/>
+                                <rect key="frame" x="62.5" y="593" width="250" height="34"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" title="Open gallery"/>
                                 <connections>
                                     <action selector="openGalleryPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RX8-OJ-2IS"/>
@@ -34,16 +35,10 @@
                                 <rect key="frame" x="63" y="40" width="249.5" height="333.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O1G-Kc-Rs6" customClass="HTPressableButton">
-                                <rect key="frame" x="145.5" y="511" width="83" height="34"/>
-                                <state key="normal" title="Make a gif"/>
-                                <connections>
-                                    <action selector="makeGifPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sx4-G2-6uw"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JCZ-Qw-D0c" customClass="HTPressableButton">
-                                <rect key="frame" x="150" y="469" width="74" height="34"/>
-                                <state key="normal" title="Play a gif">
+                                <rect key="frame" x="62.5" y="509" width="250" height="34"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Play">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -51,21 +46,21 @@
                                 </connections>
                             </button>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.29999999999999999" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Gzh-xx-Oi4">
-                                <rect key="frame" x="60.5" y="429" width="254" height="31"/>
-                                <color key="minimumTrackTintColor" red="0.90955108399999995" green="0.078654475510000002" blue="0.47871106860000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="maximumTrackTintColor" red="0.0" green="0.80000000000000004" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="60.5" y="469" width="254" height="31"/>
+                                <color key="minimumTrackTintColor" red="0.30588235289999999" green="0.83921568629999999" blue="0.32156862749999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="maximumTrackTintColor" red="0.20000000000000001" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="sliderValueChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="wUm-wb-3IY"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" x frames per second" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e7b-Lh-ryI">
-                                <rect key="frame" x="116" y="403" width="144.5" height="18"/>
+                                <rect key="frame" x="116" y="443" width="144.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="x seconds" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3hz-PM-42q">
-                                <rect key="frame" x="152.5" y="377" width="69.5" height="18"/>
+                                <rect key="frame" x="152.5" y="417" width="69.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -80,11 +75,26 @@
                                     <action selector="sharePressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="0v4-PA-zY8"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="48n-9a-Xo1" customClass="HTPressableButton">
+                                <rect key="frame" x="191.5" y="551" width="121" height="34"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Edit"/>
+                                <connections>
+                                    <action selector="editPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="k1M-HM-4z1"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O1G-Kc-Rs6" customClass="HTPressableButton">
+                                <rect key="frame" x="62" y="551" width="121" height="34"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Make a gif"/>
+                                <connections>
+                                    <action selector="makeGifPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sx4-G2-6uw"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.98039215686274506" green="0.98039215686274506" blue="0.98039215686274506" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="e7b-Lh-ryI" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="27P-7j-paC"/>
-                            <constraint firstItem="O1G-Kc-Rs6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="5ri-1I-8m4"/>
                             <constraint firstItem="OAv-07-EuZ" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="6Nx-Bm-O4l"/>
                             <constraint firstItem="SLY-Qp-Y5S" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="CKu-tB-F8L"/>
                             <constraint firstItem="Gzh-xx-Oi4" firstAttribute="top" secondItem="e7b-Lh-ryI" secondAttribute="bottom" constant="8" id="Dcg-wI-tSz"/>
@@ -94,17 +104,28 @@
                             <constraint firstItem="3hz-PM-42q" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Jeu-st-8Qg"/>
                             <constraint firstItem="lmh-nF-jXD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="L3k-e3-k7Z"/>
                             <constraint firstItem="JCZ-Qw-D0c" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="L7b-Jt-ZwI"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lmh-nF-jXD" secondAttribute="bottom" constant="80" id="Ty8-Ob-2T7"/>
+                            <constraint firstItem="lmh-nF-jXD" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="2:3" id="QZq-mC-Nvb"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="lmh-nF-jXD" secondAttribute="bottom" constant="40" id="Ty8-Ob-2T7"/>
+                            <constraint firstItem="O1G-Kc-Rs6" firstAttribute="leading" secondItem="lmh-nF-jXD" secondAttribute="leading" id="V8x-H8-wgG"/>
+                            <constraint firstItem="48n-9a-Xo1" firstAttribute="width" secondItem="lmh-nF-jXD" secondAttribute="width" multiplier="0.5" constant="-4" id="VCq-eW-p11"/>
                             <constraint firstItem="JCZ-Qw-D0c" firstAttribute="top" secondItem="Gzh-xx-Oi4" secondAttribute="bottom" constant="10" id="YWI-nV-epI"/>
                             <constraint firstItem="SLY-Qp-Y5S" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="ZKe-aX-fAG"/>
                             <constraint firstItem="SLY-Qp-Y5S" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="2:3" id="eEq-cZ-prK"/>
                             <constraint firstItem="e7b-Lh-ryI" firstAttribute="top" secondItem="3hz-PM-42q" secondAttribute="bottom" constant="8" id="fga-Jo-oiK"/>
                             <constraint firstItem="SLY-Qp-Y5S" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="20" id="gdG-yz-irF"/>
                             <constraint firstItem="O1G-Kc-Rs6" firstAttribute="top" secondItem="JCZ-Qw-D0c" secondAttribute="bottom" constant="8" id="l1Q-4n-0Er"/>
+                            <constraint firstItem="48n-9a-Xo1" firstAttribute="top" secondItem="JCZ-Qw-D0c" secondAttribute="bottom" constant="8" id="pnR-aB-mjb"/>
                             <constraint firstItem="Gzh-xx-Oi4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="r2x-ez-yIc"/>
+                            <constraint firstItem="lmh-nF-jXD" firstAttribute="top" secondItem="48n-9a-Xo1" secondAttribute="bottom" constant="8" id="rLh-0R-Ihg"/>
+                            <constraint firstItem="48n-9a-Xo1" firstAttribute="trailing" secondItem="lmh-nF-jXD" secondAttribute="trailing" id="sF2-DM-QUA"/>
+                            <constraint firstItem="JCZ-Qw-D0c" firstAttribute="width" secondItem="lmh-nF-jXD" secondAttribute="width" id="yF0-hV-jpy"/>
+                            <constraint firstItem="O1G-Kc-Rs6" firstAttribute="width" secondItem="lmh-nF-jXD" secondAttribute="width" multiplier="0.5" constant="-4" id="yqQ-7y-Mi6"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="ojr-bf-cvI"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="editButton" destination="48n-9a-Xo1" id="uag-9i-4F5"/>
                         <outlet property="fpsLabel" destination="e7b-Lh-ryI" id="O9M-NZ-3ZH"/>
                         <outlet property="imageView" destination="SLY-Qp-Y5S" id="mEk-yn-NVS"/>
                         <outlet property="makeGifButton" destination="O1G-Kc-Rs6" id="jol-tR-hhu"/>
@@ -116,7 +137,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="32.799999999999997" y="38.23088455772114"/>
+            <point key="canvasLocation" x="972" y="38.23088455772114"/>
         </scene>
     </scenes>
 </document>
